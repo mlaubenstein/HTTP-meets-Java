@@ -1,15 +1,14 @@
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class GETRequest {
 
-    public boolean finished = false;
+    private boolean finished = false;
 
-    public void sendGET(String USER_AGENT, String urlString) throws IOException {
+    public void sendGET(String USER_AGENT, String urlString, String ID) throws IOException {
 
-        URL url = new URL(urlString);
+        URL url = new URL(urlString + "/" + ID);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();//make sure it's HTTP and not https
         int responseCode;
         StringBuffer responseBuffer;
@@ -38,7 +37,7 @@ public class GETRequest {
         finished ();
     }
 
-    public boolean finished (){
+    private boolean finished(){
         return finished;
     }
 

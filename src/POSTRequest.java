@@ -1,3 +1,4 @@
+import com.google.gson.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -5,18 +6,21 @@ import java.net.URL;
 
 public class POSTRequest {
 
-    public boolean finished = false;
+    private boolean finished = false;
 
-    public void sendPOST(String USER_AGENT, String urlString) throws IOException {
+    public void sendPOST(String USER_AGENT, String urlString, String ID) throws IOException {
 
         URL url;
         int responseCode;
         HttpURLConnection connection;
         DataOutputStream dataOutputStream;
         StringBuffer responseBuffer;
+        String author,title,random;
+
+       
 
         //the sun thing is from internet, no changes to failure
-        url = new URL(null, urlString, new sun.net.www.protocol.http.Handler() );
+        url = new URL(null, urlString , new sun.net.www.protocol.http.Handler() );
         connection = (HttpURLConnection) url.openConnection();        //Make sure it's HTTP and not https
 
         //run Http POST request and pass the User Agent set in the main class
@@ -27,9 +31,17 @@ public class POSTRequest {
         connection.setDoInput ( true );
         connection.setDoOutput( true );
 
+
         //trying to post the Hello World into the stream //TODO fix the failure
+        title  = ScannerHttpPOST.scanTitle  ();
+        author = ScannerHttpPOST.scanAuthor ();
+        random = ScannerHttpPOST.scanRandom ();
         dataOutputStream = new DataOutputStream(connection.getOutputStream()); //IOException needed
-        dataOutputStream.writeBytes ( "{\"title\" : \"Neuer post \", \"author\":\"WankWank\", \"Keine Ahnung\":\"Try\" }");
+        dataOutputStream.writeBytes ( "{ \"title\":          \"" +title+"\","+
+                                        "\"author\":        \"" +author+"\","+
+                                        "\"Keine Ahnung\":  \"" +random+"\","+
+                                        "\"id\":            " +ID    +"}"
+                                      );
         dataOutputStream.flush();
         dataOutputStream.close();
 
@@ -54,7 +66,7 @@ public class POSTRequest {
         finished ();
     }
 
-    public boolean finished (){
+    private boolean finished(){
         return finished;
     }
 }

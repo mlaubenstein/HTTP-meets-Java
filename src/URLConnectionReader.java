@@ -5,7 +5,7 @@ import java.net.URL;
 
 public class URLConnectionReader {
 
-    public boolean finished = false;
+    private boolean finished = false;
 
     public void read(String USER_AGENT, String urlParsed) throws IOException {
 
@@ -35,7 +35,7 @@ public class URLConnectionReader {
         finished ();
     }
 
-    public boolean finished (){
+    private boolean finished (){
         return finished;
     }
 }
