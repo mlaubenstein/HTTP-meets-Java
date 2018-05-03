@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -9,9 +10,10 @@ public class GETRequest {
     public void sendGET(String USER_AGENT, String urlString) throws IOException {
 
         URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();//make sure it's HTTP and not https
         int responseCode;
         StringBuffer responseBuffer;
+
 
         //Run Http Get request and pass the User Agent set in the main class
         connection.setRequestMethod("GET");
@@ -29,6 +31,7 @@ public class GETRequest {
         //print result string got the method getInputStream
         System.out.println(responseBuffer.toString());
         //connection.disconnect ();//tried
+        //TODO : make output readable, by line break, after every comma
 
         //Try to solve that todo in the main
         finished = true;

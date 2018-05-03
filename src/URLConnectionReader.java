@@ -10,7 +10,7 @@ public class URLConnectionReader {
     public void read(String USER_AGENT, String urlParsed) throws IOException {
 
         URL url = new URL ( urlParsed );
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();//make sure it's HTTP and not https
         String headerName;
         String cookie;
 

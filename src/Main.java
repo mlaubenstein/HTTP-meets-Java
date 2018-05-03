@@ -12,6 +12,7 @@ public class Main {
         URLConnectionReader urlConnectionReader;
         GETRequest getRequest;
         POSTRequest postRequest;
+        DELETERequest deleteRequest;
 
         urlString = "http://localhost:3000/posts";
         url = new URL (urlString);
@@ -29,13 +30,17 @@ public class Main {
         urlConnectionReader = new URLConnectionReader ();
         urlConnectionReader.read (USER_AGENT, urlString );
         // print result of an execute a Http GET request on a URL
-        System.out.println("\n\n\nTesting 1 - Send Http GET request");
+        System.out.println( "\n\n\nTesting 1 - Send Http GET request" );
         getRequest = new GETRequest ();
         getRequest.sendGET (USER_AGENT, urlString);
         // print out the URL information after a Http POST request
-        System.out.println("\n\n\nTesting 2 - Send Http POST request");
+        System.out.println( "\n\n\nTesting 2 - Send Http POST request" );
         postRequest = new POSTRequest ();
         postRequest.sendPOST(USER_AGENT, urlString);
+
+        System.out.println ( "\n\n\nTesting 3 - Send Http DELETE request" );
+        deleteRequest = new DELETERequest ();
+        deleteRequest.sendDELETE (USER_AGENT, urlString);
 
         //TODO : Make sure that one class expires after another
 

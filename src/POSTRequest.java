@@ -1,4 +1,3 @@
-import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -18,7 +17,7 @@ public class POSTRequest {
 
         //the sun thing is from internet, no changes to failure
         url = new URL(null, urlString, new sun.net.www.protocol.http.Handler() );
-        connection = (HttpURLConnection) url.openConnection();
+        connection = (HttpURLConnection) url.openConnection();        //Make sure it's HTTP and not https
 
         //run Http POST request and pass the User Agent set in the main class
         connection.setRequestMethod("POST");//
@@ -30,7 +29,7 @@ public class POSTRequest {
 
         //trying to post the Hello World into the stream //TODO fix the failure
         dataOutputStream = new DataOutputStream(connection.getOutputStream()); //IOException needed
-        dataOutputStream.writeBytes ( "{\"title\" : \"Neuer post \", \"author\":\"WankWank\" }");
+        dataOutputStream.writeBytes ( "{\"title\" : \"Neuer post \", \"author\":\"WankWank\", \"Keine Ahnung\":\"Try\" }");
         dataOutputStream.flush();
         dataOutputStream.close();
 
@@ -45,6 +44,7 @@ public class POSTRequest {
 
         //print result
         System.out.println(responseBuffer.toString());
+        //TODO : make output readable, by line break, after every comma
 
         //connection.disconnect ();//Tried
         dataOutputStream.close ();
